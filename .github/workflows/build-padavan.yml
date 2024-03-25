@@ -110,6 +110,8 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_WIREGUARD=n" >>.config # wireguard 代理
         echo "CONFIG_FIRMWARE_INCLUDE_ZEROTIER=n" >>.config  # zerotier
         echo "CONFIG_FIRMWARE_INCLUDE_TTYD=n" >>.config      # TTYD
+        echo "CONFIG_FIRMWARE_INCLUDE_WYY=n" >> .config #网易云解锁（暂时没用）
+        echo "CONFIG_FIRMWARE_INCLUDE_WYYBIN=n" >> .config #网易云解锁GO版本执行文件（4M多）注意固件超大小,不集成会自动下载
         #########################################################################################
         #自定义添加其它功能请参考源码configs/templates/目录下的config文件。按照上面的格式添加即可
         #格式如下：
@@ -120,8 +122,6 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_ADBYBY=y" >> .config  #adbyby plus+
         echo "CONFIG_FIRMWARE_INCLUDE_DROPBEAR=y" >> .config # Dropbear(SSH服务）
         echo "CONFIG_FIRMWARE_INCLUDE_DROPBEAR_FAST_CODE=y" >> .config # Dropbear(SSH服务）
-        echo "CONFIG_FIRMWARE_INCLUDE_WYY=y" >> .config #网易云解锁
-        echo "CONFIG_FIRMWARE_INCLUDE_WYYBIN=n" >> .config #网易云解锁GO版本执行文件（4M多）注意固件超大小,不集成会自动下载
         #########################################################################################
         USER_NAME="admin"                       # 用户名 admin
         USER_PASSWORD=$USER_NAME                # 用户密码 admin
