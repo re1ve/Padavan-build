@@ -123,6 +123,29 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_WYY=y" >> .config #网易云解锁
         echo "CONFIG_FIRMWARE_INCLUDE_WYYBIN=n" >> .config #网易云解锁GO版本执行文件（4M多）注意固件超大小,不集成会自动下载
         #########################################################################################
+        USER_NAME="admin"                       # 用户名 admin
+        USER_PASSWORD=$USER_NAME                # 用户密码 admin
+        LAN_IP="192.168.88"                     # lan 地址 192.168.3.1 一定别写后面的 .1
+        WIFI_PASSWORD="88888888"                # wifi密码，切记密码最少8位 admin
+        VERSION_TIME=$(date "+%Y%m%d")          # 自动时间更新时版本号: 20200320
+        DEFAULT_PATH="./user/shared/defaults.h" # 默认文件配置目录
+        # '修改用户名'
+        sed -i 's/#define\s*SYS_USER_ROOT\s*"admin"/#define  SYS_USER_ROOT     "'$USER_NAME'"/g' $DEFAULT_PATH
+        
+        # '修改密码'
+        sed -i 's/#define\s*DEF_ROOT_PASSWORD\s*"admin"/#define  DEF_ROOT_PASSWORD     "'$USER_PASSWORD'"/g' $DEFAULT_PATH
+        
+        # "修改Lan ip"
+        sed -i "s/192.168.2/$LAN_IP/g" $DEFAULT_PATH
+        
+        # "修改Wif密码"
+        sed -i "s/1234567890/$WIFI_PASSWORD/g" $DEFAULT_PATH
+        
+        # "更新版本号时间"
+        sed -i "s/FIRMWARE_BUILDS_REV=[0-9]*/FIRMWARE_BUILDS_REV=$VERSION_TIME/g" ./versions.inc
+        #########################################################################################
+
+        
         sudo ./clear_tree
         sudo ./build_firmware_modify $TNAME 0
         sudo mv -f images/*.trx /opt/images/
