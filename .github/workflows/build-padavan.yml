@@ -37,7 +37,7 @@ jobs:
         if [ $KERNEL = "4.4" ] ; then
         git clone --depth=1 https://github.com/MeIsReallyBa/padavan-4.4.git /opt/rt-n56u
         else
-        git clone --depth=1 https://github.com/hiboyhiboy/rt-n56u.git /opt/rt-n56u
+        git clone --depth=1 https://github.com/re1ve/rt-n56u.git /opt/rt-n56u
         fi
         cd /opt/rt-n56u/toolchain-mipsel
         sh dl_toolchain.sh
@@ -79,7 +79,6 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_SSOBFS=n" >> .config # simple-obfs混淆插件
         echo "CONFIG_FIRMWARE_INCLUDE_SSSERVER=n" >> .config #SS server
         echo "CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER=n" >> .config #DNSFORWARDER
-        echo "CONFIG_FIRMWARE_INCLUDE_ADBYBY=n" >> .config #adbyby plus+
         echo "CONFIG_FIRMWARE_INCLUDE_FRPC=n" >> .config #内网穿透FRPC
         echo "CONFIG_FIRMWARE_INCLUDE_FRPS=n" >> .config #内网穿透FRPS
         echo "CONFIG_FIRMWARE_INCLUDE_TUNSAFE=n" >> .config #TUNSAFE
@@ -91,21 +90,37 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_KOOLPROXY=n" >> .config #KP广告过滤
         echo "CONFIG_FIRMWARE_INCLUDE_CADDY=n" >> .config #在线文件管理服务
         echo "CONFIG_FIRMWARE_INCLUDE_CADDYBIN=n" >> .config #集成caddu执行文件，此文件有13M,请注意固件大小。如果不集成，会从网上下载下来执行，不影响正常使用
-        echo "CONFIG_FIRMWARE_INCLUDE_ADGUARDHOME=y" >> .config
-        echo "CONFIG_FIRMWARE_INCLUDE_SRELAY=n" >> .config #可以不集成
-        echo "CONFIG_FIRMWARE_INCLUDE_WYY=y" >> .config #网易云解锁
-        echo "CONFIG_FIRMWARE_INCLUDE_WYYBIN=n" >> .config #网易云解锁GO版本执行文件（4M多）注意固件超大小,不集成会自动下载
-        echo "CONFIG_FIRMWARE_INCLUDE_ZEROTIER=n" >> .config #zerotier ~1.3M
+        
+        echo "CONFIG_FIRMWARE_INCLUDE_ADGUARDHOME=n" >> .config # 广告过滤
+        echo "CONFIG_FIRMWARE_INCLUDE_QOS=n" >> .config      # QoS
+        echo "CONFIG_FIRMWARE_INCLUDE_SFE=n" >>.config       # SFE
+        echo "CONFIG_FIRMWARE_ENABLE_USB=n" >>.config        # USB
+        echo "CONFIG_FIRMWARE_INCLUDE_OPENSSH=n" >>.config   # OpenSSH 已用Dropbear替代
+        echo "CONFIG_FIRMWARE_INCLUDE_OPENVPN=n" >>.config   # OpenVPN
+        echo "CONFIG_FIRMWARE_INCLUDE_FFMPEG_NEW=n" >>.config# mediadlna ffmpeg解码 
+        echo "CONFIG_FIRMWARE_INCLUDE_ARIA=n" >>.config      # aria2
+        echo "CONFIG_FIRMWARE_INCLUDE_MINIEAP=n" >>.config   # 锐捷认证
+        echo "CONFIG_FIRMWARE_INCLUDE_NJIT_CLIENT=n" >>.config# NJIT 认证
+        echo "CONFIG_FIRMWARE_INCLUDE_VLMCSD=n" >>.config    # KMS Windows激活服务器
+        echo "CONFIG_FIRMWARE_INCLUDE_HTOP=n" >>.config      # htop 进程管理工具
+        echo "CONFIG_FIRMWARE_INCLUDE_NANO=n" >>.config      # nano 编辑器
+        echo "CONFIG_FIRMWARE_INCLUDE_IPERF3=n" >>.config    # 网络宽带测速工具
+        echo "CONFIG_FIRMWARE_INCLUDE_MTR=n" >>.config       # 网络诊断工具
+        echo "CONFIG_FIRMWARE_INCLUDE_SRELAY=n" >>.config    # Sock5代理服务器
+        echo "CONFIG_FIRMWARE_INCLUDE_WIREGUARD=n" >>.config # wireguard 代理
+        echo "CONFIG_FIRMWARE_INCLUDE_ZEROTIER=n" >>.config  # zerotier
         #########################################################################################
         #自定义添加其它功能请参考源码configs/templates/目录下的config文件。按照上面的格式添加即可
         #格式如下：
         #sed -i '/自定义项/d' .config
         #echo "自定义项=y" >> .config
-        echo "CONFIG_FIRMWARE_INCLUDE_VLMCSD=n" >> .config #KMS服务器
-        echo "CONFIG_FIRMWARE_INCLUDE_OPENSSH=n" >> .config # 禁用OPENSSH，使用Dropbear代替
+        echo "CONFIG_FIRMWARE_ENABLE_IPV6=y" >>.config      # IPv6
+        echo "CONFIG_FIRMWARE_INCLUDE_HTTPS=y" >>.config    # https
+        echo "CONFIG_FIRMWARE_INCLUDE_ADBYBY=y" >> .config  #adbyby plus+
         echo "CONFIG_FIRMWARE_INCLUDE_DROPBEAR=y" >> .config # Dropbear(SSH服务）
         echo "CONFIG_FIRMWARE_INCLUDE_DROPBEAR_FAST_CODE=y" >> .config # Dropbear(SSH服务）
-        echo "CONFIG_FIRMWARE_INCLUDE_QOS=y" >> .config #QoS
+        echo "CONFIG_FIRMWARE_INCLUDE_WYY=y" >> .config #网易云解锁
+        echo "CONFIG_FIRMWARE_INCLUDE_WYYBIN=n" >> .config #网易云解锁GO版本执行文件（4M多）注意固件超大小,不集成会自动下载
         #########################################################################################
         sudo ./clear_tree
         sudo ./build_firmware_modify $TNAME 0
