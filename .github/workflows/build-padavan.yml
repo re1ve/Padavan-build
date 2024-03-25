@@ -153,5 +153,5 @@ jobs:
       uses: actions/upload-artifact@master
       if: always()
       with:
-        name: Padavan-$VERSION_TIME
+        name: Padavan-${VERSION_TIME}
         path: /opt/images
