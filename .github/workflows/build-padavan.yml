@@ -109,6 +109,7 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_SRELAY=n" >>.config    # Sock5代理服务器
         echo "CONFIG_FIRMWARE_INCLUDE_WIREGUARD=n" >>.config # wireguard 代理
         echo "CONFIG_FIRMWARE_INCLUDE_ZEROTIER=n" >>.config  # zerotier
+        echo "CONFIG_FIRMWARE_INCLUDE_TTYD=n" >>.config      # TTYD
         #########################################################################################
         #自定义添加其它功能请参考源码configs/templates/目录下的config文件。按照上面的格式添加即可
         #格式如下：
